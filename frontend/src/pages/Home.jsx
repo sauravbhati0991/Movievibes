@@ -7,7 +7,7 @@ import SearchBar from "../components/SearchBar";
 
 function Home() {
   return (
-    <div className="m-0 p-0 w-full">
+    <div>
       <Logo />
       <Navbar />
       <SearchBar />

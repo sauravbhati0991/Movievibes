@@ -14,9 +14,11 @@ export default function MainSlider() {
   let [movieGen, setmovieGen] = useState([]);
   let [ReleaseY, setReleaseY] = useState("");
   let [apiKey, setApiKey] = useState("");
+  let [bgPoster, setBgPoster] = useState(false);
   let handleClick = (i, v) => {
     setbtnState(i);
     setdata(v);
+    setBgPoster(true);
     setmovieGen(v?.genre_ids);
     let releaseYear = v?.release_date;
     let releasearray = releaseYear.split("-");
@@ -33,18 +35,19 @@ export default function MainSlider() {
       console.log(err);
     }
   };
-  let GetShows = async () => {
+  let GetShows = async (apiKey) => {
     try {
       await fetch(
         `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=true&language=en-US&page=1&sort_by=popularity.desc&api_key=${apiKey}`
       )
         .then((res) => res.json())
         .then((json) => setshows(json.results));
+      console.log(shows);
     } catch (err) {
-      console.error(err);
+      console.log(err);
     }
   };
-  let GetGenres = async () => {
+  let GetGenres = async (apiKey) => {
     try {
       await fetch(
         `https://api.themoviedb.org/3/genre/movie/list?language=en&api_key=${apiKey}`
@@ -91,74 +94,74 @@ export default function MainSlider() {
   };
   return (
     <div className=" absolute w-full xsm:h-screen/2 sm:h-screen/90 flex items-center flex-col z-[-1]">
-      <div className=" absolute bg-transparent sm:bottom-0 sm:left-[100px] xsm:left-0 xsm:bottom-[12%] text-wrap text-center flex flex-col justify-center items-center">
-        <h1 className=" font-marker sm:py-3 xsm:py-[5px] sm:w-[250px] xsm:w-[180px] text-white text-shadow shadow-white/100 sm:text-[25px] xsm:text-[14px]">
-          {data?.title}
-        </h1>
-        <div className=" font-freeman sm:my-3 xsm:my-[2px] flex">
-          <p className=" text-white  xsm:p-1 sm:p-2 xsm:text-[12px] sm:text-[15px] pxtext-nowrap">
-            Year : ({ReleaseY})
+      {bgPoster ? (
+        <div className=" absolute bg-transparent sm:bottom-[120px] sm:left-[100px] xsm:left-0 xsm:bottom-[12%]  text-wrap text-center flex flex-col justify-center items-center">
+          <h1 className=" font-marker md:py-3 xsm:py-[5px] md:w-[250px] xsm:w-[180px] text-white text-shadow shadow-white/100 md:text-[25px] xsm:text-[14px]">
+            {data?.title}
+          </h1>
+          <div className=" font-freeman md:my-3 xsm:my-[2px] flex">
+            <p className=" text-white  xsm:p-1 md:p-2 xsm:text-[12px] md:text-[15px] pxtext-nowrap">
+              Year : ({ReleaseY})
+            </p>
+            <p className=" text-white xsm:p-1 md:p-2 xsm:text-[12px] md:text-[15px] text-nowrap">
+              Rating : {Math.round(data?.vote_average * 10) / 10}
+            </p>
+            <p className=" text-white mx-2 xsm:p-1 md:p-2 xsm:text-[12px] md:text-[15px] text-nowrap rounded-md bg-gray-500 bg-opacity-60">
+              {data?.original_language}
+            </p>
+          </div>
+          <p
+            className={` p-2 text-white md:w-[250px] xsm:w-[150px] md:text-[17px] xsm:text-[10px] sm:h-[150px] xsm:hidden sm:block overflow-y-scroll no-scrollbar rounded-lg scroll-smooth`}
+          >
+            {data?.overview}
           </p>
-          <p className=" text-white xsm:p-1 sm:p-2 xsm:text-[12px] sm:text-[15px] text-nowrap">
-            Rating : {Math.round(data?.vote_average * 10) / 10}
-          </p>
-          <p className=" text-white mx-2 xsm:p-1 sm:p-2 xsm:text-[12px] sm:text-[15px] text-nowrap rounded-md bg-gray-500 bg-opacity-60">
-            {data?.original_language}
-          </p>
+          <div className="flex flex-wrap justify-center md:my-2 xsm:my-0 p-2 md:w-[300px] xsm:w-[200px]">
+            {genres.map((v, i) => {
+              return (
+                <div key={i}>
+                  {v?.id === movieGen[0] ? (
+                    <p className="md:p-1 md:m-1 xsm:p-[2px] xsm:m-[2px] md:text-[15px] xsm:text-[12px] cursor-pointer text-white bg-red-500 bg-opacity-60 rounded-md hover:bg-red-600 hover:bg-opacity-70">
+                      {v?.name}
+                    </p>
+                  ) : null}
+                  {v?.id === movieGen[1] ? (
+                    <p className="md:p-1 md:m-1 xsm:p-[2px] xsm:m-[2px] md:text-[15px] xsm:text-[12px] cursor-pointer text-white bg-red-500 bg-opacity-60 rounded-md hover:bg-red-600 hover:bg-opacity-70">
+                      {v?.name}
+                    </p>
+                  ) : null}
+                  {v?.id === movieGen[2] ? (
+                    <p className="md:p-1 md:m-1 xsm:p-[2px] xsm:m-[2px] md:text-[15px] xsm:text-[12px] cursor-pointer text-white bg-red-500 bg-opacity-60 rounded-md hover:bg-red-600 hover:bg-opacity-70">
+                      {v?.name}
+                    </p>
+                  ) : null}
+                  {v?.id === movieGen[3] ? (
+                    <p className="md:p-1 md:m-1 xsm:p-[2px] xsm:m-[2px] md:text-[15px] xsm:text-[12px] cursor-pointer text-white bg-red-500 bg-opacity-60 rounded-md hover:bg-red-600 hover:bg-opacity-70">
+                      {v?.name}
+                    </p>
+                  ) : null}
+                  {v?.id === movieGen[4] ? (
+                    <p className="md:p-1 md:m-1 xsm:p-[2px] xsm:m-[2px] md:text-[15px] xsm:text-[12px] cursor-pointer text-white bg-red-500 bg-opacity-60 rounded-md hover:bg-red-600 hover:bg-opacity-70">
+                      {v?.name}
+                    </p>
+                  ) : null}
+                  {v?.id === movieGen[5] ? (
+                    <p className="md:p-1 md:m-1 xsm:p-[2px] xsm:m-[2px] md:text-[15px] xsm:text-[10px] cursor-pointer text-white bg-red-500 bg-opacity-60 rounded-md hover:bg-red-600 hover:bg-opacity-70">
+                      {v?.name}
+                    </p>
+                  ) : null}
+                </div>
+              );
+            })}
+          </div>
+          <div className=" w-full flex justify-evenly md:pb-2 xsm:my-2">
+            <button className=" bg-gray-600 md:px-3 md:py-2 xsm:px-1 xsm:py-[2px] rounded cursor-pointer md:text-lg xsm:text-sm hover:shadow-lg bg-opacity-50 hover:bg-opacity-60 hover:bg-gray-700 text-white">
+              More Info <InfoOutlinedIcon />
+            </button>
+          </div>
         </div>
-        <p
-          className={` p-2 text-white sm:w-[250px] xsm:w-[150px] sm:text-[17px] xsm:text-[10px] sm:h-[150px] xsm:hidden sm:block overflow-y-scroll no-scrollbar rounded-lg scroll-smooth`}
-        >
-          {data?.overview}
-        </p>
-        <div className="flex flex-wrap justify-center sm:my-2 xsm:my-0 p-2 sm:w-[300px] xsm:w-[200px]">
-          {genres.map((v, i) => {
-            return (
-              <div key={i}>
-                {v?.id === movieGen[0] ? (
-                  <p className="sm:p-1 sm:m-1 xsm:p-[2px] xsm:m-[2px] sm:text-[15px] xsm:text-[12px] cursor-pointer text-white bg-red-500 bg-opacity-60 rounded-md hover:bg-red-600 hover:bg-opacity-70">
-                    {v?.name}
-                  </p>
-                ) : null}
-                {v?.id === movieGen[1] ? (
-                  <p className="sm:p-1 sm:m-1 xsm:p-[2px] xsm:m-[2px] sm:text-[15px] xsm:text-[12px] cursor-pointer text-white bg-red-500 bg-opacity-60 rounded-md hover:bg-red-600 hover:bg-opacity-70">
-                    {v?.name}
-                  </p>
-                ) : null}
-                {v?.id === movieGen[2] ? (
-                  <p className="sm:p-1 sm:m-1 xsm:p-[2px] xsm:m-[2px] sm:text-[15px] xsm:text-[12px] cursor-pointer text-white bg-red-500 bg-opacity-60 rounded-md hover:bg-red-600 hover:bg-opacity-70">
-                    {v?.name}
-                  </p>
-                ) : null}
-                {v?.id === movieGen[3] ? (
-                  <p className="sm:p-1 sm:m-1 xsm:p-[2px] xsm:m-[2px] sm:text-[15px] xsm:text-[12px] cursor-pointer text-white bg-red-500 bg-opacity-60 rounded-md hover:bg-red-600 hover:bg-opacity-70">
-                    {v?.name}
-                  </p>
-                ) : null}
-                {v?.id === movieGen[4] ? (
-                  <p className="sm:p-1 sm:m-1 xsm:p-[2px] xsm:m-[2px] sm:text-[15px] xsm:text-[12px] cursor-pointer text-white bg-red-500 bg-opacity-60 rounded-md hover:bg-red-600 hover:bg-opacity-70">
-                    {v?.name}
-                  </p>
-                ) : null}
-                {v?.id === movieGen[5] ? (
-                  <p className="sm:p-1 sm:m-1 xsm:p-[2px] xsm:m-[2px] sm:text-[15px] xsm:text-[10px] cursor-pointer text-white bg-red-500 bg-opacity-60 rounded-md hover:bg-red-600 hover:bg-opacity-70">
-                    {v?.name}
-                  </p>
-                ) : null}
-              </div>
-            );
-          })}
-        </div>
-        <div className=" w-full flex justify-evenly sm:pb-2 xsm:my-2">
-          <button className=" bg-gray-600 sm:px-6 sm:py-2 xsm:px-1 xsm:py-[2px] rounded cursor-pointer sm:text-lg xsm:text-sm hover:shadow-lg bg-opacity-50 hover:bg-opacity-60 hover:bg-gray-700 text-white">
-            Play
-          </button>
-          <button className=" bg-gray-600 sm:px-3 sm:py-2 xsm:px-1 xsm:py-[2px] rounded cursor-pointer sm:text-lg xsm:text-sm hover:shadow-lg bg-opacity-50 hover:bg-opacity-60 hover:bg-gray-700 text-white">
-            Info <InfoOutlinedIcon />
-          </button>
-        </div>
-      </div>
-      <div className=" absolute bg-transparent xsm:-bottom-[50px] xsm:mx-2 sm:w-[30%] sm:h-[20%] sm:right-10 sm:bottom-10">
+      ) : null}
+
+      <div className=" absolute bg-transparent xsm:-bottom-[50px] xsm:mx-2 sm:w-[30%] sm:h-[20%] sm:right-10 sm:bottom-10 bg-[#121b3c]">
         <button
           onClick={ScrollRight}
           className={`absolute left-0  text-white h-full w-[50px] rounded-md hover:bg-gradient-to-r hover:from-slate-700 ${
@@ -201,8 +204,14 @@ export default function MainSlider() {
       </div>
       <div className=" absolute w-full h-full z-[-1] bg-[#070F2B] flex justify-center items-center">
         <img
-          className="w-contain rounded-lg sm:[85%] xsm:w-full md:w-[75%] lg:w-[50%] shadow-[20px_20px_50px_15px_rgba(255,255,255,0.7)]"
-          src={`https://image.tmdb.org/t/p/w500${data?.backdrop_path}`}
+          className={`w-contain rounded-lg sm:[85%] xsm:w-full md:w-[75%] lg:w-[50%] shadow-[20px_20px_50px_15px_rgba(255,255,255,0.7)] ${
+            bgPoster ? null : " aspect-[4/3]"
+          }`}
+          src={
+            bgPoster
+              ? `https://image.tmdb.org/t/p/w500${data?.backdrop_path}`
+              : "/images/LogoMakerCa-1716099081526-removebg.png"
+          }
           alt=""
         />
       </div>

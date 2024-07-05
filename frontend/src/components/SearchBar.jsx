@@ -3,7 +3,7 @@ import SearchIcon from "@mui/icons-material/Search";
 
 export default function SearchBar() {
   return (
-    <div className=" z-[2] fixed flex items-center xsm:top-12 xsm:w-[70%] xsm:mx-[15%] ssm:w-auto ssm:mx-[0px] ssm:right-5 ssm:top-5 bg-slate-300 rounded-[50px] hover:bg-slate-100 ">
+    <div className=" z-[2] absolute flex items-center xsm:top-12 xsm:w-[70%] xsm:mx-[15%] ssm:w-auto ssm:mx-[0px] ssm:right-5 ssm:top-5 bg-slate-300 rounded-[50px] hover:bg-slate-100 ">
       <form action="" className="flex items-center xsm:w-full">
         <input
           type="text"

@@ -7,7 +7,7 @@ export default function Navbar() {
   let [active, setactive] = useState(0);
   let [fade, setfade] = useState(false);
   return (
-    <div className="fixed sm:h-screen xsm:w-screen sm:w-fit xsm:bottom-0 flex items-center justify-center sm:flex-col xsm:flex-row pl-[30px] bg-transparent ">
+    <div className=" absolute sm:h-screen xsm:w-screen sm:w-fit xsm:bottom-0 flex items-center justify-center sm:flex-col xsm:flex-row pl-[30px] bg-transparent ">
       <div
         className={` h-full bg-transparent absolute left-0  blur-sm bg-gradient-to-r from-slate-600 w-[150px] z-[-1] xsm:hidden sm:block ${
           fade ? "sm:block" : "sm:hidden "

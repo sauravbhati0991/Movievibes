@@ -17,17 +17,31 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: #070f2b;
+  margin: 0;
+  padding: 0;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.hover-delay {
+  --tw-scale-x: 1.5;
+  --tw-scale-y: 1.5;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+    rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+    scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  z-index: 1;
+}
+
+.inner-shadow-main-movie {
+  -webkit-box-shadow: inset 0px 40px 42px -39px rgba(255, 255, 255, 1),
+    inset 0px -40px 42px -39px rgba(255, 255, 255, 1);
+  -moz-box-shadow: inset 0px 40px 42px -39px rgba(255, 255, 255, 1),
+    inset 0px -40px 42px -39px rgba(255, 255, 255, 1);
+  box-shadow: inset 0px 40px 42px -39px rgba(255, 255, 255, 1),
+    inset 0px -40px 42px -39px rgba(255, 255, 255, 1);
 }
