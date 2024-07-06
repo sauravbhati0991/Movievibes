@@ -6,10 +6,16 @@ export default function Navbar() {
   let [hover, sethover] = useState(0);
   let [active, setactive] = useState(0);
   let [fade, setfade] = useState(false);
+
   useEffect(() => {
-    const icon = document.getElementById("navigator-1");
-    icon.click();
+    const path = window.location.pathname.split("/");
+    if (path[path.length - 1] === "") {
+      document.getElementById(`navigator-1`).click();
+    } else if (path.includes("myprofile")) {
+      document.getElementById(`navigator-0`).click();
+    }
   }, []);
+
   return (
     <div className=" xsm:fixed sm:absolute sm:h-screen xsm:w-screen sm:w-fit xsm:bottom-0 flex items-center justify-center sm:flex-col xsm:flex-row pl-[30px] sm:bg-transparent rounded-lg xsm:backdrop-blur-sm sm:backdrop-blur-none">
       <div
@@ -22,7 +28,7 @@ export default function Navbar() {
           <div
             key={i}
             id={`navigator-${i}`}
-            className="xsm:py-[8px] sm:py-[25px] xsm:w-full z-[2]"
+            className="xsm:py-[8px] sm:py-[25px] xsm:w-full z-[2] "
             onClick={() => setactive(i + 1)}
             onMouseEnter={() => {
               sethover(i + 1);
@@ -36,9 +42,11 @@ export default function Navbar() {
             {active === v.id ? (
               hover === v.id ? (
                 <div className="flex relative cursor-pointer">
-                  <h1 className="text-shadow-lg select-none shadow-white/100 text-white xsm:w-[13.3%] mr-5 xsm:hidden sm:block sm:w-[70px] text-[20px] text-nowrap font-mono font-bold">
-                    {v.title}
-                  </h1>
+                  <a href={v.route}>
+                    <h1 className="text-shadow-lg select-none shadow-white/100 text-white xsm:w-[13.3%] mr-5 xsm:hidden sm:block sm:w-[70px] text-[20px] text-nowrap font-mono font-bold">
+                      {v.title}
+                    </h1>
+                  </a>
                   {v.onhover}
                 </div>
               ) : (
@@ -48,9 +56,11 @@ export default function Navbar() {
               )
             ) : hover === v.id ? (
               <div className="flex relative cursor-pointer">
-                <h1 className=" text-shadow-lg select-none shadow-white/100 text-white mr-5 xsm:w-[13.3%] sm:w-[70px] text-lg text-nowrap xsm:hidden sm:block font-mono font-bold">
-                  {v.title}
-                </h1>
+                <a href={v.route}>
+                  <h1 className=" text-shadow-lg select-none shadow-white/100 text-white mr-5 xsm:w-[13.3%] sm:w-[70px] text-lg text-nowrap xsm:hidden sm:block font-mono font-bold">
+                    {v.title}
+                  </h1>
+                </a>
                 {v.onhover}
               </div>
             ) : (

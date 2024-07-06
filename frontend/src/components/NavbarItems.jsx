@@ -13,13 +13,15 @@ import React from "react";
 export let items = [
   {
     id: 1,
-    title: "Account",
+    route: "/myprofile",
+    title: "Profile",
     nohover: <PersonOutlineOutlinedIcon className=" text-white" />,
     onhover: <PersonIcon className=" text-white" />,
     active: <PersonIcon className=" text-white" />,
   },
   {
     id: 2,
+    route: "/",
     title: "Home",
     nohover: <HomeOutlinedIcon className=" text-white" />,
     onhover: <HomeIcon className=" text-white" />,
@@ -27,6 +29,7 @@ export let items = [
   },
   {
     id: 3,
+    route: "/tvshows",
     title: "TV Shows",
     nohover: <TvIcon className=" text-white" />,
     onhover: <DesktopWindowsIcon className=" text-white" />,
@@ -34,6 +37,7 @@ export let items = [
   },
   {
     id: 4,
+    route: "/movies",
     title: "Movies",
     nohover: <MovieOutlinedIcon className=" text-white" />,
     onhover: <MovieIcon className=" text-white" />,
@@ -41,6 +45,7 @@ export let items = [
   },
   {
     id: 5,
+    route: "/category",
     title: "Category",
     nohover: <CategoryOutlinedIcon className=" text-white" />,
     onhover: <CategoryIcon className=" text-white" />,
