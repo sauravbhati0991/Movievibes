@@ -1,15 +1,19 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { items } from "./NavbarItems";
 
 export default function Navbar() {
   let [hover, sethover] = useState(0);
   let [active, setactive] = useState(0);
   let [fade, setfade] = useState(false);
+  useEffect(() => {
+    const icon = document.getElementById("navigator-1");
+    icon.click();
+  }, []);
   return (
-    <div className=" absolute sm:h-screen xsm:w-screen sm:w-fit xsm:bottom-0 flex items-center justify-center sm:flex-col xsm:flex-row pl-[30px] bg-transparent ">
+    <div className=" xsm:fixed sm:absolute sm:h-screen xsm:w-screen sm:w-fit xsm:bottom-0 flex items-center justify-center sm:flex-col xsm:flex-row pl-[30px] sm:bg-transparent rounded-lg xsm:backdrop-blur-sm sm:backdrop-blur-none">
       <div
-        className={` h-full bg-transparent absolute left-0  blur-sm bg-gradient-to-r from-slate-600 w-[150px] z-[-1] xsm:hidden sm:block ${
+        className={` h-full bg-transparent absolute left-0  blur-sm bg-gradient-to-r from-slate-600 w-[150px] z-[1] xsm:hidden sm:block ${
           fade ? "sm:block" : "sm:hidden "
         }`}
       ></div>
@@ -17,7 +21,8 @@ export default function Navbar() {
         return (
           <div
             key={i}
-            className="py-[25px] xsm:w-full"
+            id={`navigator-${i}`}
+            className="xsm:py-[8px] sm:py-[25px] xsm:w-full z-[2]"
             onClick={() => setactive(i + 1)}
             onMouseEnter={() => {
               sethover(i + 1);

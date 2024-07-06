@@ -73,26 +73,42 @@ export default function Slider({ data, field }) {
               onMouseOver={() => handleMouseOver(i)}
               onMouseLeave={() => handleMouseLeave(i)}
               style={{
-                backgroundImage: `url('https://image.tmdb.org/t/p/w500${v?.poster_path}')`,
+                backgroundImage: v?.poster_path
+                  ? `url('https://image.tmdb.org/t/p/w500${v?.poster_path}')`
+                  : `url('https://image.tmdb.org/t/p/w500${v?.profile_path}')`,
               }}
               className={`cursor-pointer bg-cover sm:min-w-[120px] sm:min-h-[180px] xsm:min-w-[80px] xsm:min-h-[120px] rounded-md sm:w-[120px] xsm:w-[80px] transform transition-transform duration-300 ease-in-out`}
             >
               {details === i ? (
                 <div className=" relative text-start sm:min-w-[120px] sm:min-h-[180px] xsm:min-w-[80px] xsm:min-h-[120px] bg-gradient-to-t from-[#000823] via-[#21232e] to-transparent sm:w-[120px] xsm:w-[80px] sm:text-[15px] xsm:text-[12px] bg-transparent p-2 rounded-md shadow-lg">
                   <p className=" absolute bottom-[30%] sm:text-[10px] xsm:text-[8px] text-shadow shadow-white/100">
-                    {v?.title}
+                    {v?.title ? v?.title : v?.original_name}
                   </p>
                   <p className=" absolute bottom-[23%] sm:text-[10px] xsm:text-[8px] ">
-                    ({v?.release_date.split("-")[0]})
+                    {v?.known_for_department === "Acting"
+                      ? null
+                      : v?.release_date
+                      ? `(${v?.release_date.split("-")[0]})`
+                      : `(${v?.first_air_date.split("-")[0]})`}
                   </p>
                   <p className=" absolute bottom-[12%] sm:text-[10px] xsm:text-[8px] ">
-                    Ratings: {Math.round(v?.vote_average * 10) / 10}
+                    {v?.known_for_department === "Acting"
+                      ? `Popularity: ${Math.round(v?.popularity * 10) / 10}`
+                      : `Ratings: ${Math.round(v?.vote_average * 10) / 10}`}
                   </p>
                   <p className=" absolute bottom-[2%] sm:text-[10px] xsm:text-[8px] ">
-                    Language:{" "}
-                    <span className="w-fit px-1 rounded-md bg-gray-500 bg-opacity-60">
-                      {v?.original_language}
-                    </span>
+                    {v?.gender ? null : "Language: "}
+                    {v?.gender ? (
+                      v?.gender === 1 ? (
+                        "Actress"
+                      ) : (
+                        "Actor"
+                      )
+                    ) : (
+                      <span className="w-fit px-1 rounded-md bg-gray-500 bg-opacity-60">
+                        {v?.original_language}
+                      </span>
+                    )}
                   </p>
                 </div>
               ) : null}
