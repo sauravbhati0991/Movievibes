@@ -23,24 +23,56 @@ export default function DetailsSection({ data }) {
     try {
       const Today = new Date(Date.now());
       const OneWeekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
-      const SixMonths = new Date(Date.now() + 6 * 30 * 24 * 60 * 60 * 1000);
+      const SixMonths = new Date(Date.now() + 12 * 30 * 24 * 60 * 60 * 1000);
       await fetch(
-        `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&${
-          filterData.wood === "hollywood"
-            ? "language=en-US&region=US&with_original_language=en"
-            : "language=hi-IN&region=IN&with_original_language=hi"
-        }&page=${filterData.page}&sort_by=${
-          filterData.filter === "popular"
-            ? "popularity.desc"
-            : filterData.filter === "toprated"
-            ? "vote_average.desc&without_genres=99,10755&vote_count.gte=200"
-            : filterData.filter === "upcoming"
-            ? `popularity.desc&with_release_type=2|3&release_date.gte=${
-                Today.toISOString().split("T")[0]
-              }&release_date.lte=${SixMonths.toISOString().split("T")[0]}`
-            : `popularity.desc&with_release_type=2|3&release_date.gte=${
-                OneWeekAgo.toISOString().split("T")[0]
-              }&release_date.lte=${Today.toISOString().split("T")[0]}`
+        `https://api.themoviedb.org/3/${
+          data === "People"
+            ? `person/popular?api_key=${apiKey}&language=en-US&page=${filterData.page}`
+            : `discover/${
+                data === "Movies"
+                  ? `movie?api_key=${apiKey}&${
+                      filterData.wood === "hollywood"
+                        ? "language=en-US&region=US&with_original_language=en"
+                        : "language=hi-IN&region=IN&with_original_language=hi"
+                    }&page=${filterData.page}&sort_by=${
+                      filterData.filter === "popular"
+                        ? "popularity.desc"
+                        : filterData.filter === "toprated"
+                        ? "vote_average.desc&without_genres=99,10755&vote_count.gte=200"
+                        : filterData.filter === "upcoming"
+                        ? `popularity.desc&with_release_type=2|3&release_date.gte=${
+                            Today.toISOString().split("T")[0]
+                          }&release_date.lte=${
+                            SixMonths.toISOString().split("T")[0]
+                          }`
+                        : `popularity.desc&with_release_type=2|3&release_date.gte=${
+                            OneWeekAgo.toISOString().split("T")[0]
+                          }&release_date.lte=${
+                            Today.toISOString().split("T")[0]
+                          }`
+                    }`
+                  : data === "TV Shows"
+                  ? `tv?api_key=${apiKey}&${
+                      filterData.wood === "hollywood"
+                        ? "language=en-US&region=US&with_original_language=en"
+                        : "language=hi-IN&region=IN&with_original_language=hi"
+                    }&page=${filterData.page}&sort_by=${
+                      filterData.filter === "popular"
+                        ? "popularity.desc"
+                        : filterData.filter === "toprated"
+                        ? "vote_average.desc"
+                        : filterData.filter === "upcoming"
+                        ? `popularity.desc&air_date.lte=${
+                            SixMonths.toISOString().split("T")[0]
+                          }&air_date.gte=${Today.toISOString().split("T")[0]}`
+                        : `popularity.desc&air_date.lte=${
+                            Today.toISOString().split("T")[0]
+                          }&air_date.gte=${
+                            OneWeekAgo.toISOString().split("T")[0]
+                          }`
+                    }`
+                  : null
+              }`
         }`
       )
         .then((res) => res.json())
@@ -142,7 +174,14 @@ export default function DetailsSection({ data }) {
 }
 
 // https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=hi-IN&region=IN&with_original_language=hi&page=1&sort_by=popularity.desc
-// https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=hi-IN&region=IN&with_original_language=hi&page=1&sort_by=vote_average.desc&without_genres=99,10755&vote_count.gte=200
+// https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&language=hi-IN&region=IN&with_original_language=hi&page=1&sort_by=popularity.desc
+// https://api.themoviedb.org/3/person/popular?language=en-US&page=1
 
 // https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=hi-IN&region=IN&with_original_language=hi&page=1&sort_by=popularity.desc&with_release_type=2|3&release_date.gte=${Today.toISOString().split("T")[0]}&release_date.lte=${SixMonths.toISOString().split("T")[0]}
+// https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&language=hi-IN&region=IN&with_original_language=hi&page=1&sort_by=popularity.desc&air_date.lte={SixMonths.toISOString().split("T")[0]}&air_date.gte={Today.toISOString().split("T")[0]}
+
 // https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=hi-IN&region=IN&with_original_language=hi&page=1&sort_by=popularity.desc&with_release_type=2|3&release_date.gte=${OneWeekAgo.toISOString().split("T")[0]}&release_date.lte=${Today.toISOString().split("T")[0]}
+// https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&language=hi-IN&region=IN&with_original_language=hi&page=1&sort_by=popularity.desc&air_date.lte={Today.toISOString().split("T")[0]}&air_date.gte={OneWeekAgo.toISOString().split("T")[0]}
+
+// https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=hi-IN&region=IN&with_original_language=hi&page=1&sort_by=vote_average.desc&without_genres=99,10755&vote_count.gte=200
+// https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&language=hi-IN&region=IN&with_original_language=hi&page=1&sort_by=vote_average.desc&vote_count.gte=200

@@ -3,14 +3,14 @@ import Navbar from "@/components/Navbar";
 import Logo from "@/components/Logo";
 import DetailsSection from "@/components/DetailsSec";
 
-function Movies() {
+function TVShows() {
   return (
     <div>
       <Logo />
       <Navbar />
-      <DetailsSection data={"Movies"} />
+      <DetailsSection data={"TV Shows"} />
     </div>
   );
 }
 
-export default Movies;
+export default TVShows;

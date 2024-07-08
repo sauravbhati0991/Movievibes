@@ -4,6 +4,7 @@ import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 
 export default function FilterBox({ data, getFilter }) {
   let [showBox, setShowBox] = useState(false);
+  let [route, setRoute] = useState(false);
   let [filter, setFilter] = useState({
     wood: "hollywood",
     page: "1",
@@ -25,6 +26,9 @@ export default function FilterBox({ data, getFilter }) {
   useEffect(() => {
     getFilter(filter);
   }, [filter, getFilter]);
+  useEffect(() => {
+    setRoute(window.location.pathname.split("/").includes("people"));
+  }, []);
 
   return (
     <div className=" w-full">
@@ -46,7 +50,11 @@ export default function FilterBox({ data, getFilter }) {
           showBox ? " flex" : "hidden"
         } sm:flex min-w-[80%] max-w-[80%] sm:mt-[100px] sm:my-[100px] lmd:mt-[100px] lmd:my-[100px] xsm:m-auto sm:ml-[100px] lmd:m-auto py-5 px-4 gap-8 bg-[#182450] justify-center items-center flex-wrap rounded-lg`}
       >
-        <div className="px-4 py-2 bg-[#263670] text-nowrap rounded-lg flex gap-3">
+        <div
+          className={` ${
+            route ? " hidden" : " flex"
+          } px-4 py-2 bg-[#263670] text-nowrap rounded-lg  gap-3`}
+        >
           <p>
             Hollywood{" "}
             <input
@@ -83,7 +91,11 @@ export default function FilterBox({ data, getFilter }) {
             />
           </p>
         </div>
-        <div className=" px-5 py-2 bg-[#263670] rounded-lg flex xsm:gap-[17px] sm:gap-7 flex-wrap justify-center text-nowrap items-center">
+        <div
+          className={` ${
+            route ? " hidden" : " flex flex-wrap "
+          } px-5 py-2 bg-[#263670] rounded-lg xsm:gap-[17px] sm:gap-7 justify-center text-nowrap items-center`}
+        >
           <div className="flex gap-3">
             Popularity
             <input
@@ -104,7 +116,7 @@ export default function FilterBox({ data, getFilter }) {
             />
           </div>
           <div className="flex gap-3">
-            UpComing
+            Upcoming
             <input
               type="radio"
               name="filter"
@@ -113,7 +125,7 @@ export default function FilterBox({ data, getFilter }) {
             />
           </div>
           <div className="flex gap-3">
-            In Theaters
+            Today
             <input
               type="radio"
               name="filter"

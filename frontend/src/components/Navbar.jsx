@@ -6,25 +6,25 @@ export default function Navbar() {
   let [hover, sethover] = useState(0);
   let [active, setactive] = useState(0);
   let [fade, setfade] = useState(false);
-  let [fixed, setFixed] = useState(true);
 
   useEffect(() => {
     const path = window.location.pathname.split("/");
     if (path[path.length - 1] === "") {
       document.getElementById(`navigator-1`).click();
-      setFixed(false);
     } else if (path.includes("myprofile")) {
       document.getElementById(`navigator-0`).click();
     } else if (path.includes("movies")) {
       document.getElementById("navigator-3").click();
+    } else if (path.includes("tvshows")) {
+      document.getElementById("navigator-2").click();
+    } else if (path.includes("people")) {
+      document.getElementById("navigator-4").click();
     }
   }, []);
 
   return (
     <div
-      className={`xsm:fixed sm:${
-        setFixed ? " fixed" : " absolute"
-      } sm:h-screen xsm:w-screen sm:w-fit xsm:bottom-0 flex items-center justify-center sm:flex-col xsm:flex-row sm:pl-[30px] sm:bg-transparent rounded-lg xsm:backdrop-blur-sm sm:backdrop-blur-none xsm:z-10 sm:z-[1]`}
+      className={`xsm:fixed sm:h-screen xsm:w-screen sm:w-fit xsm:bottom-0 flex items-center justify-center sm:flex-col xsm:flex-row sm:pl-[30px] sm:bg-transparent rounded-lg xsm:backdrop-blur-sm sm:backdrop-blur-none xsm:z-10 sm:z-[1]`}
     >
       <div
         className={` h-full bg-transparent absolute left-0  blur-sm bg-gradient-to-r from-slate-600 w-[150px] z-[1] xsm:hidden sm:block ${
