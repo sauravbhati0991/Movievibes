@@ -78,7 +78,7 @@ export default function MainSlider() {
     } else {
       sethideRBTN(false);
     }
-    if (Slider.scrollLeft >= eval(Slider.scrollWidth - 80)) {
+    if (Slider.scrollLeft >= Slider.scrollWidth - 80) {
       sethideLBTN(true);
     }
   };
@@ -88,7 +88,7 @@ export default function MainSlider() {
     if (Slider.scrollLeft <= 80) {
       sethideRBTN(true);
     }
-    if (Slider.scrollLeft >= eval(Slider.scrollWidth - 80)) {
+    if (Slider.scrollLeft >= Slider.scrollWidth - 80) {
       sethideLBTN(false);
     }
   };
@@ -154,7 +154,7 @@ export default function MainSlider() {
             })}
           </div>
           <div className=" w-full flex justify-evenly md:pb-2 xsm:my-2">
-            <button className=" bg-gray-600 md:px-3 md:py-2 xsm:px-1 xsm:py-[2px] rounded cursor-pointer md:text-lg xsm:text-sm hover:shadow-lg bg-opacity-50 hover:bg-opacity-60 hover:bg-gray-700 text-white">
+            <button className=" bg-gray-600 md:px-3 md:py-2 xsm:px-1 xsm:py-[2px] rounded cursor-pointer md:text-lg xsm:text-sm hover:shadow-lg bg-opacity-90 hover:bg-opacity-100 hover:bg-gray-700 text-white">
               More Info <InfoOutlinedIcon />
             </button>
           </div>

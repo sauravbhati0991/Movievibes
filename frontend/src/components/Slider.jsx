@@ -15,7 +15,7 @@ export default function Slider({ data, field }) {
     } else {
       setHideRBTN(false);
     }
-    if (Slider.scrollLeft >= eval(Slider.scrollWidth - 80)) {
+    if (Slider.scrollLeft >= Slider.scrollWidth - 80) {
       setHideLBTN(true);
     }
   };
@@ -26,7 +26,7 @@ export default function Slider({ data, field }) {
     if (Slider.scrollLeft <= 80) {
       setHideRBTN(true);
     }
-    if (Slider.scrollLeft >= eval(Slider.scrollWidth - 80)) {
+    if (Slider.scrollLeft >= Slider.scrollWidth - 80) {
       setHideLBTN(false);
     }
   };

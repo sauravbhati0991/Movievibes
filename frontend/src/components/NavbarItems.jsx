@@ -4,8 +4,8 @@ import TvIcon from "@mui/icons-material/Tv";
 import DesktopWindowsIcon from "@mui/icons-material/DesktopWindows";
 import MovieOutlinedIcon from "@mui/icons-material/MovieOutlined";
 import MovieIcon from "@mui/icons-material/Movie";
-import CategoryOutlinedIcon from "@mui/icons-material/CategoryOutlined";
-import CategoryIcon from "@mui/icons-material/Category";
+import GroupIcon from "@mui/icons-material/Group";
+import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import PersonIcon from "@mui/icons-material/Person";
 import React from "react";
@@ -45,10 +45,10 @@ export let items = [
   },
   {
     id: 5,
-    route: "/category",
-    title: "Category",
-    nohover: <CategoryOutlinedIcon className=" text-white" />,
-    onhover: <CategoryIcon className=" text-white" />,
-    active: <CategoryIcon className=" text-white" />,
+    route: "/people",
+    title: "People",
+    nohover: <GroupOutlinedIcon className=" text-white" />,
+    onhover: <GroupIcon className=" text-white" />,
+    active: <GroupIcon className=" text-white" />,
   },
 ];
