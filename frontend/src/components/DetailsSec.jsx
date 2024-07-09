@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import FilterBox from "./filterBox";
+import slugify from "slugify";
 
 export default function DetailsSection({ data }) {
   let [detail, setDetail] = useState(null);
@@ -118,54 +119,68 @@ export default function DetailsSection({ data }) {
       <div className="w-[85%] xsm:mt-[50px] sm:mt-0 xsm:mb-[50px] sm:mb-[80px] sm:ml-[100px] sm:mr-3 py-5 px-1 rounded-lg bg-[#182450] flex items-center justify-center gap-8 flex-wrap inner-shadow-main-movie">
         {detail?.results.map((v, i) => (
           <>
-            <div
-              key={i}
-              id={`poster-id-${i}`}
-              onMouseOver={() => handleMouseOver(i)}
-              onMouseLeave={() => handleMouseLeave(i)}
-              style={{
-                backgroundImage: v?.poster_path
-                  ? `url('https://image.tmdb.org/t/p/w500${v?.poster_path}')`
-                  : `url('https://image.tmdb.org/t/p/w500${v?.profile_path}')`,
-              }}
-              className={`cursor-pointer shadow-md shadow-white z-0 bg-cover sm:min-w-[120px] sm:min-h-[180px] xsm:min-w-[80px] xsm:min-h-[120px] rounded-md sm:w-[120px] xsm:w-[80px] transform transition-transform duration-300 ease-in-out`}
+            <a
+              href={`${
+                data === "People"
+                  ? "people/"
+                  : data === "Movies"
+                  ? "movies/"
+                  : "tvshows/"
+              }${slugify(v?.title ? v?.title : v?.original_name, {
+                lower: true,
+              })}-${v?.id}`}
             >
-              {index === i ? (
-                <div className=" relative text-start sm:min-w-[120px] sm:min-h-[180px] xsm:min-w-[80px] xsm:min-h-[120px] bg-gradient-to-t from-[#000823] via-[#21232e] to-transparent sm:w-[120px] xsm:w-[80px] sm:text-[15px] xsm:text-[12px] bg-transparent p-2 rounded-md shadow-lg">
-                  <p className=" absolute bottom-[30%] sm:text-[10px] xsm:text-[8px] text-shadow shadow-white/100">
-                    {v?.title ? v?.title : v?.original_name}
-                  </p>
-                  <p className=" absolute bottom-[23%] sm:text-[10px] xsm:text-[8px] ">
-                    {v?.known_for_department === "Acting"
-                      ? null
-                      : v?.release_date
-                      ? `(${v?.release_date.split("-")[0]})`
-                      : v?.first_air_date
-                      ? `(${v?.first_air_date.split("-")[0]})`
-                      : "N/A"}
-                  </p>
-                  <p className=" absolute bottom-[12%] sm:text-[10px] xsm:text-[8px] ">
-                    {v?.known_for_department === "Acting"
-                      ? `Popularity: ${Math.round(v?.popularity * 10) / 10}`
-                      : `Ratings: ${Math.round(v?.vote_average * 10) / 10}`}
-                  </p>
-                  <p className=" absolute bottom-[2%] sm:text-[10px] xsm:text-[8px] ">
-                    {v?.gender ? null : "Language: "}
-                    {v?.gender ? (
-                      v?.gender === 1 ? (
-                        "Actress"
+              <div
+                key={i}
+                id={`poster-id-${i}`}
+                onMouseOver={() => handleMouseOver(i)}
+                onMouseLeave={() => handleMouseLeave(i)}
+                style={{
+                  backgroundImage: v?.poster_path
+                    ? `url('https://image.tmdb.org/t/p/w500${v?.poster_path}')`
+                    : v?.profile_path
+                    ? `url('https://image.tmdb.org/t/p/w500${v?.profile_path}')`
+                    : 'url("/images/LogoMakerCa-1716099081526-removebg-poster.png")',
+                }}
+                className={` hover:-translate-y-5 cursor-pointer shadow-md shadow-white z-0 bg-cover sm:min-w-[120px] sm:min-h-[180px] xsm:min-w-[80px] xsm:min-h-[120px] rounded-md sm:w-[120px] xsm:w-[80px] transform transition-transform duration-300 ease-in-out`}
+              >
+                {index === i ? (
+                  <div className=" relative text-start sm:min-w-[120px] sm:min-h-[180px] xsm:min-w-[80px] xsm:min-h-[120px] bg-gradient-to-t from-[#000823] via-[#21232e] to-transparent sm:w-[120px] xsm:w-[80px] sm:text-[15px] xsm:text-[12px] bg-transparent p-2 rounded-md shadow-lg">
+                    <p className=" absolute bottom-[30%] sm:text-[10px] xsm:text-[8px] text-shadow shadow-white/100">
+                      {v?.title ? v?.title : v?.original_name}
+                    </p>
+                    <p className=" absolute bottom-[23%] sm:text-[10px] xsm:text-[8px] ">
+                      {v?.known_for_department === "Acting"
+                        ? null
+                        : v?.release_date
+                        ? `(${v?.release_date.split("-")[0]})`
+                        : v?.first_air_date
+                        ? `(${v?.first_air_date.split("-")[0]})`
+                        : "N/A"}
+                    </p>
+                    <p className=" absolute bottom-[12%] sm:text-[10px] xsm:text-[8px] ">
+                      {v?.known_for_department === "Acting"
+                        ? `Popularity: ${Math.round(v?.popularity * 10) / 10}`
+                        : `Ratings: ${Math.round(v?.vote_average * 10) / 10}`}
+                    </p>
+                    <p className=" absolute bottom-[2%] sm:text-[10px] xsm:text-[8px] ">
+                      {v?.gender ? null : "Language: "}
+                      {v?.gender ? (
+                        v?.gender === 1 ? (
+                          "Actress"
+                        ) : (
+                          "Actor"
+                        )
                       ) : (
-                        "Actor"
-                      )
-                    ) : (
-                      <span className="w-fit px-1 rounded-md bg-gray-500 bg-opacity-60">
-                        {v?.original_language}
-                      </span>
-                    )}
-                  </p>
-                </div>
-              ) : null}
-            </div>
+                        <span className="w-fit px-1 rounded-md bg-gray-500 bg-opacity-60">
+                          {v?.original_language}
+                        </span>
+                      )}
+                    </p>
+                  </div>
+                ) : null}
+              </div>
+            </a>
           </>
         ))}
       </div>

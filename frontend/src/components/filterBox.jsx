@@ -1,21 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 
 export default function FilterBox({ data, getFilter }) {
   let [showBox, setShowBox] = useState(false);
   let [route, setRoute] = useState(false);
-  let [filter, setFilter] = useState({
+  const [filter, setFilter] = useState({
     wood: "hollywood",
     page: "1",
     filter: "popular",
   });
+  const pageRef = useRef(null);
 
   const handleFilter = (event) => {
     const { name, value } = event.target;
+    let newValue = value;
+
+    if (name === "page") {
+      if (value === "") {
+        newValue = "1";
+      } else if (value > data?.total_pages) {
+        newValue = data?.total_pages;
+        pageRef.current.value = data?.total_pages;
+      }
+    }
+
     setFilter((prevFilter) => ({
       ...prevFilter,
-      [name]: value,
+      [name]: newValue,
     }));
   };
 
@@ -84,6 +96,7 @@ export default function FilterBox({ data, getFilter }) {
               className="custom-number-input w-[55px] pl-2 pr-1 m-2 bg-[#182450] outline-none rounded-lg"
               type="number"
               name="page"
+              ref={pageRef}
               min={1}
               max={data?.total_pages}
               onChange={handleFilter}

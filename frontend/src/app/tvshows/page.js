@@ -1,6 +1,6 @@
 import TVShows from "@/pages/TVShows";
 
-export default function AboutPage() {
+export default function TVShowsPage() {
   return (
     <>
       <TVShows />

@@ -1,6 +1,6 @@
 import People from "@/pages/People";
 
-export default function AboutPage() {
+export default function PeoplesPage() {
   return (
     <>
       <People />

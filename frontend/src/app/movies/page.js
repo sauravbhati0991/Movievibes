@@ -1,6 +1,6 @@
 import Movies from "@/pages/Movies";
 
-export default function AboutPage() {
+export default function MoviesPage() {
   return (
     <>
       <Movies />
