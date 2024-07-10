@@ -8,7 +8,7 @@ function TVShowsDetails({ id }) {
     <div>
       <Logo />
       <Navbar />
-      <DetailPage id={id} />
+      {/* <DetailPage id={id} field={"TVShow"} /> */}
     </div>
   );
 }

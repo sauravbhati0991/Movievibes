@@ -8,7 +8,7 @@ function MoviesDetails({ id }) {
     <div>
       <Logo />
       <Navbar />
-      <DetailPage id={id} />
+      <DetailPage id={id} field={"Movie"} />
     </div>
   );
 }

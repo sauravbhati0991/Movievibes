@@ -8,7 +8,7 @@ function PeopleDetails({ id }) {
     <div>
       <Logo />
       <Navbar />
-      <DetailPage id={id} />
+      <DetailPage id={id} field={"People"} />
     </div>
   );
 }

@@ -77,7 +77,7 @@ export default function Slider({ data, field }) {
                   ? `url('https://image.tmdb.org/t/p/w500${v?.poster_path}')`
                   : `url('https://image.tmdb.org/t/p/w500${v?.profile_path}')`,
               }}
-              className={`cursor-pointer bg-cover sm:min-w-[120px] sm:min-h-[180px] xsm:min-w-[80px] xsm:min-h-[120px] rounded-md sm:w-[120px] xsm:w-[80px] transform transition-transform duration-300 ease-in-out`}
+              className={` hover:z-[1] cursor-pointer bg-cover sm:min-w-[120px] sm:min-h-[180px] xsm:min-w-[80px] xsm:min-h-[120px] rounded-md sm:w-[120px] xsm:w-[80px] transform transition-transform duration-300 ease-in-out`}
             >
               {details === i ? (
                 <div className=" relative text-start sm:min-w-[120px] sm:min-h-[180px] xsm:min-w-[80px] xsm:min-h-[120px] bg-gradient-to-t from-[#000823] via-[#21232e] to-transparent sm:w-[120px] xsm:w-[80px] sm:text-[15px] xsm:text-[12px] bg-transparent p-2 rounded-md shadow-lg">
@@ -89,7 +89,9 @@ export default function Slider({ data, field }) {
                       ? null
                       : v?.release_date
                       ? `(${v?.release_date.split("-")[0]})`
-                      : `(${v?.first_air_date.split("-")[0]})`}
+                      : v?.first_air_date
+                      ? `(${v?.first_air_date.split("-")[0]})`
+                      : null}
                   </p>
                   <p className=" absolute bottom-[12%] sm:text-[10px] xsm:text-[8px] ">
                     {v?.known_for_department === "Acting"

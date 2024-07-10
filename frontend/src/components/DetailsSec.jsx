@@ -96,7 +96,6 @@ export default function DetailsSection({ data }) {
 
   const getFilterData = (filter) => {
     setFilterData(filter);
-    console.log(filterData);
   };
 
   useEffect(() => {
