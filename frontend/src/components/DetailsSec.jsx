@@ -20,6 +20,7 @@ export default function DetailsSection({ data }) {
       console.log(err);
     }
   };
+
   let GetDetails = async (apiKey) => {
     try {
       const Today = new Date(Date.now());
