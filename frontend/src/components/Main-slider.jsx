@@ -95,7 +95,7 @@ export default function MainSlider() {
   return (
     <div className=" absolute w-full xsm:h-screen/2 sm:h-screen/90 flex items-center flex-col z-[-1]">
       {bgPoster ? (
-        <div className=" absolute bg-transparent sm:bottom-[120px] sm:left-[100px] xsm:left-0 xsm:bottom-[12%]  text-wrap text-center flex flex-col justify-center items-center">
+        <div className="backdrop-blur-sm rounded-lg absolute bg-transparent sm:bottom-[120px] sm:left-[100px] xsm:left-0 xsm:bottom-[12%]  text-wrap text-center flex flex-col justify-center items-center">
           <h1 className=" font-marker md:py-3 xsm:py-[5px] md:w-[250px] xsm:w-[180px] text-white text-shadow shadow-white/100 md:text-[25px] xsm:text-[14px]">
             {data?.title}
           </h1>

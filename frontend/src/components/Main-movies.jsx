@@ -170,28 +170,28 @@ export default function Mainmovies() {
               Popular Movies
             </h1>
             <div>
-              <Slider data={popMovie} field={"pop"} />
+              <Slider data={popMovie} field={"pop"} mainField={"Movie"} />
             </div>
             <hr />
             <h1 className="  xsm:text-[15px] sm:text-[18px] my-1 mx-5 font-freeman text-start bg-[#121b3c] rounded-lg py-1 px-3">
               Top Rated Movies
             </h1>
             <div>
-              <Slider data={rateMovie} field={"rate"} />
+              <Slider data={rateMovie} field={"rate"} mainField={"Movie"} />
             </div>
             <hr />
             <h1 className="  xsm:text-[15px] sm:text-[18px] my-1 mx-5 font-freeman text-start bg-[#121b3c] rounded-lg py-1 px-3">
               Upcoming Movies
             </h1>
             <div>
-              <Slider data={upcoming} field={"upcoming"} />
+              <Slider data={upcoming} field={"upcoming"} mainField={"Movie"} />
             </div>
             <hr />
             <h1 className="  xsm:text-[15px] sm:text-[18px] my-1 mx-5 font-freeman text-start bg-[#121b3c] rounded-lg py-1 px-3">
               Movies in Theater
             </h1>
             <div>
-              <Slider data={running} field={"running"} />
+              <Slider data={running} field={"running"} mainField={"Movie"} />
             </div>
           </div>
         </div>
@@ -206,28 +206,36 @@ export default function Mainmovies() {
               Popular TV Shows
             </h1>
             <div>
-              <Slider data={popTV} field={"popTV"} />
+              <Slider data={popTV} field={"popTV"} mainField={"Tvshow"} />
             </div>
             <hr />
             <h1 className="  xsm:text-[15px] sm:text-[18px] my-1 mx-5 font-freeman text-start bg-[#121b3c] rounded-lg py-1 px-3">
               Top Rated TV Shows
             </h1>
             <div>
-              <Slider data={rateTV} field={"rateTV"} />
+              <Slider data={rateTV} field={"rateTV"} mainField={"Tvshow"} />
             </div>
             <hr />
             <h1 className="  xsm:text-[15px] sm:text-[18px] my-1 mx-5 font-freeman text-start bg-[#121b3c] rounded-lg py-1 px-3">
               Upcoming TV Shows
             </h1>
             <div>
-              <Slider data={upcomingTV} field={"upcomingTV"} />
+              <Slider
+                data={upcomingTV}
+                field={"upcomingTV"}
+                mainField={"Tvshow"}
+              />
             </div>
             <hr />
             <h1 className="  xsm:text-[15px] sm:text-[18px] my-1 mx-5 font-freeman text-start bg-[#121b3c] rounded-lg py-1 px-3">
               TV Shows (On Air today)
             </h1>
             <div>
-              <Slider data={runningTV} field={"runningTV"} />
+              <Slider
+                data={runningTV}
+                field={"runningTV"}
+                mainField={"Tvshow"}
+              />
             </div>
           </div>
         </div>
@@ -239,10 +247,18 @@ export default function Mainmovies() {
         <div className=" flex justify-center my-2">
           <div className=" w-[95%] bg-[#182450] rounded-lg">
             <div>
-              <Slider data={popPerson1} field={"popPerson-1"} />
+              <Slider
+                data={popPerson1}
+                field={"popPerson-1"}
+                mainField={"People"}
+              />
             </div>
             <div>
-              <Slider data={popPerson2} field={"popPerson-2"} />
+              <Slider
+                data={popPerson2}
+                field={"popPerson-2"}
+                mainField={"People"}
+              />
             </div>
           </div>
         </div>
