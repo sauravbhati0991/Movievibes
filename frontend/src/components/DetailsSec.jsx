@@ -12,7 +12,7 @@ export default function DetailsSection({ data }) {
   let GetApiKey = async () => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/movies`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/apikey`
       );
       const key = await response.json();
       setApiKey(key.ApiKey);

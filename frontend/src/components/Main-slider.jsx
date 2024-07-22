@@ -27,7 +27,7 @@ export default function MainSlider() {
   let GetApiKey = async () => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/movies`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/apikey`
       );
       const key = await response.json();
       setApiKey(key.ApiKey);
@@ -42,7 +42,6 @@ export default function MainSlider() {
       )
         .then((res) => res.json())
         .then((json) => setshows(json.results));
-      console.log(shows);
     } catch (err) {
       console.log(err);
     }
@@ -184,20 +183,18 @@ export default function MainSlider() {
         >
           {shows.map((v, i) => {
             return (
-              <>
-                <img
-                  key={i}
-                  onClick={() => handleClick(i, v)}
-                  id={`poster-id-${i}`}
-                  className={`cursor-pointer rounded-md sm:w-[70px] sm:hover:w-[75px] xsm:w-[50px] xsm:hover:w-[55px] ${
-                    btnState === i
-                      ? "sm:w-[80px] sm:hover:w-[80px] xsm:w-[60px] xsm:hover:w-[60px]"
-                      : null
-                  }`}
-                  src={`https://image.tmdb.org/t/p/w500${v?.poster_path}`}
-                  alt=""
-                />
-              </>
+              <img
+                key={i}
+                onClick={() => handleClick(i, v)}
+                id={`poster-id-${i}`}
+                className={`cursor-pointer rounded-md sm:w-[70px] sm:hover:w-[75px] xsm:w-[50px] xsm:hover:w-[55px] ${
+                  btnState === i
+                    ? "sm:w-[80px] sm:hover:w-[80px] xsm:w-[60px] xsm:hover:w-[60px]"
+                    : null
+                }`}
+                src={`https://image.tmdb.org/t/p/w500${v?.poster_path}`}
+                alt=""
+              />
             );
           })}
         </div>

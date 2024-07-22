@@ -31,6 +31,9 @@ module.exports = {
         lg: "0 8px 16px var(--tw-shadow-color)",
         xl: "0 16px 32px var(--tw-shadow-color)",
       },
+      boxShadow: {
+        box: "10px 10px 5px black, -5px -5px 5px #3c4c87",
+      },
       fontFamily: {
         marker: ["Permanent Marker"],
         freeman: ["Freeman"],
