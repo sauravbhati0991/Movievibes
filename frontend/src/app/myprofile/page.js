@@ -1,10 +1,9 @@
-import Navbar from "@/components/Navbar";
+import Profile from "@/pages/Profile";
 
 export default function MyProfilePage() {
   return (
     <div>
-      <Navbar />
-      <h1>Profile Page!</h1>
+      <Profile />
     </div>
   );
 }

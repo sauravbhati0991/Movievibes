@@ -19,7 +19,7 @@ function Login() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     if (!email || !password) {
-      toast.error("Enter both email password.");
+      toast.error("Enter both email and password.");
     } else {
       try {
         const res = await axios.post(
@@ -104,7 +104,10 @@ function Login() {
                   minLength={8}
                   className=" px-2 py-1 mb-3 w-full mt-2 rounded-lg bg-[#334999] outline-none"
                 />
-                <div onClick={handleShow} className=" absolute right-2 top-2">
+                <div
+                  onClick={handleShow}
+                  className=" cursor-pointer absolute right-2 top-2"
+                >
                   {!showPass ? <VisibilityOffIcon /> : <VisibilityIcon />}
                 </div>
               </div>

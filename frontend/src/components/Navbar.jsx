@@ -29,7 +29,7 @@ export default function Navbar() {
       <div
         className={` h-full bg-transparent absolute left-0  blur-sm bg-gradient-to-r from-slate-600 w-[150px] z-[1] xsm:hidden sm:block ${
           fade ? "sm:block" : "sm:hidden "
-        }`}
+        } transition-all duration-500 ease-in-out`}
       ></div>
       {items.map((v, i) => {
         return (

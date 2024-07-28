@@ -159,8 +159,8 @@ export default function Mainmovies() {
   });
 
   return (
-    <div className="absolute top-[58vh] sm:top-[85vh] w-full text-white z-[-1] flex flex-col justify-center items-center">
-      <div className=" w-[95%] bg-[#121b3c] rounded-lg mb-16">
+    <div className="absolute top-[64vh] sm:top-[85vh] w-full text-white z-[-1] flex flex-col justify-center xsm:items-center sm:items-end">
+      <div className=" xsm:w-[95%] sm:w-[85%] lg:w-[90%] bg-[#121b3c] rounded-lg mb-16  sm:mr-4">
         <h1 className=" xsm:text-[15px] sm:text-[20px] my-2 mx-5 font-freeman text-center underline text-shadow shadow-white/100">
           Movies Section
         </h1>
@@ -196,7 +196,7 @@ export default function Mainmovies() {
           </div>
         </div>
       </div>
-      <div className=" w-[95%] bg-[#121b3c] rounded-lg mb-16">
+      <div className="xsm:w-[95%] sm:w-[85%] lg:w-[90%] bg-[#121b3c] rounded-lg mb-16  sm:mr-4">
         <h1 className=" xsm:text-[15px] sm:text-[20px] my-2 mx-5 font-freeman text-center underline text-shadow shadow-white/100">
           TV Shows
         </h1>
@@ -240,7 +240,7 @@ export default function Mainmovies() {
           </div>
         </div>
       </div>
-      <div className=" w-[95%] bg-[#121b3c] rounded-lg">
+      <div className=" xsm:w-[95%] sm:w-[85%] lg:w-[90%] bg-[#121b3c] rounded-lg  sm:mr-4">
         <h1 className=" xsm:text-[15px] sm:text-[20px] my-2 mx-5 font-freeman text-center underline text-shadow shadow-white/100">
           Popular Peoples
         </h1>

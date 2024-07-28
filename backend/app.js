@@ -21,4 +21,14 @@ app.use("/api/v1/apikey", apiRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1", clientRouter);
 
+app.use((req, res, next) => {
+  if (req.fileValidationError) {
+    return res.status(200).json({
+      status: "error",
+      message: req.fileValidationError,
+    });
+  }
+  next();
+});
+
 module.exports = app;

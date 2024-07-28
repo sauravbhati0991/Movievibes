@@ -9,6 +9,7 @@ const signAccessToken = (id) => {
     expiresIn: process.env.JWT_ACCESS_EXPIRES_IN,
   });
 };
+
 const signRefreshToken = () => {
   return crypto.randomBytes(64).toString("hex");
 };
@@ -104,12 +105,11 @@ exports.signup = catchAsync(async (req, res, next) => {
   const existingUser = await User.findOne({ email });
   if (!existingUser) {
     const newUser = await User.create(req.body);
-    newUser.password = undefined;
     createAccessAndRefreshToken(newUser, 200, res);
   } else {
     res.status(200).json({
       status: "error",
-      data: "Exists",
+      data: "exists",
     });
   }
 });

@@ -41,7 +41,7 @@ export default function SearchBar() {
   });
 
   return (
-    <div className=" z-[2] absolute flex flex-col  xsm:top-12 xsm:w-[70%] xsm:mx-[15%] sm:w-auto sm:mx-[0px] sm:right-5 sm:top-15 bg-slate-300 rounded-lg hover:bg-slate-100 ">
+    <div className=" z-[2] absolute flex flex-col  xsm:top-[80px] xsm:w-[70%] xsm:mx-[15%] sm:w-auto sm:mx-[0px] sm:right-5 sm:top-15 bg-slate-300 rounded-lg hover:bg-slate-100 ">
       <form className="flex items-center relative xsm:w-full">
         <input
           onChange={(e) => handleSearch(e)}

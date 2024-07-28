@@ -60,11 +60,10 @@ function SignUp() {
           },
           { headers: { "Content-Type": "application/json" } }
         );
-        console.log(res);
-        if (res.data.status === "error") {
-          toast.error("Email already exists.");
-        } else {
-          toast.success("Sign up successfully!", {
+        if (res.data.status === "success") {
+          localStorage.setItem("accessToken", res.data.accessToken);
+          localStorage.setItem("refreshToken", res.data.refreshToken);
+          toast.success("Signed up successfully!", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -78,6 +77,18 @@ function SignUp() {
           window.setTimeout(() => {
             location.assign("/");
           }, 500);
+        } else if (res.data.data === "exists") {
+          toast.error("Email already exists", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
         }
       } catch (err) {
         console.log(err);
@@ -121,7 +132,10 @@ function SignUp() {
                   placeholder="••••••••"
                   className=" px-2 py-1 mb-3 w-full mt-2 rounded-lg bg-[#334999] outline-none"
                 />
-                <div onClick={handleShowP} className=" absolute right-2 top-2">
+                <div
+                  onClick={handleShowP}
+                  className=" cursor-pointer absolute right-2 top-2"
+                >
                   {!showPassP ? <VisibilityOffIcon /> : <VisibilityIcon />}
                 </div>
               </div>
@@ -136,7 +150,10 @@ function SignUp() {
                   placeholder="••••••••"
                   className=" px-2 py-1 mb-3 w-full mt-2 rounded-lg bg-[#334999] outline-none"
                 />
-                <div onClick={handleShowPC} className=" absolute right-2 top-2">
+                <div
+                  onClick={handleShowPC}
+                  className=" cursor-pointer absolute right-2 top-2"
+                >
                   {!showPassPC ? <VisibilityOffIcon /> : <VisibilityIcon />}
                 </div>
               </div>

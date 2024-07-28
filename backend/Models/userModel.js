@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "../frontend/public/images/default.jpg",
   },
-  favorite: [String],
+  review: [String],
   like: [String],
   active: {
     type: Boolean,
@@ -59,9 +59,16 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
-  this.password = await bcrypt.hash(this.password, 12);
+  if (!this.password || !this.isModified("password")) return next();
+  try {
+    const salt = await bcrypt.genSalt(12);
+    this.password = await bcrypt.hash(this.password, salt);
+  } catch (err) {
+    console.error("Error hashing password:", err);
+    return next(err);
+  }
   this.passwordConfirm = undefined;
+  this.refreshToken = undefined;
   this.passwordChangedAt = Date.now() - 1000;
   next();
 });

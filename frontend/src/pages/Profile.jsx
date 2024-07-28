@@ -1,15 +1,15 @@
 "use client";
 import "react-toastify/dist/ReactToastify.css";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Logo from "@/components/Logo";
-import DetailPage from "@/components/DetailPage";
 import LogOut from "@/components/LogOut";
 import User from "@/components/User";
+import UserPage from "@/components/UserPage";
 import { fetchAccess } from "@/utilites/getClient";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 
-function PeopleDetails({ id }) {
+function Profile() {
   let [access, setAccess] = useState(true);
   let [notificationShown, setNotificationShown] = useState(false);
 
@@ -51,10 +51,10 @@ function PeopleDetails({ id }) {
       <User />
       <Navbar />
       <LogOut />
-      <DetailPage id={id} field={"People"} />
+      <UserPage />
       <ToastContainer />
     </div>
   );
 }
 
-export default PeopleDetails;
+export default Profile;

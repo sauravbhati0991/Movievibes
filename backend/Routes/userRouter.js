@@ -7,8 +7,16 @@ Router.route("/login").post(authController.login);
 Router.route("/signup").post(authController.signup);
 Router.get("/logout", authController.logout);
 Router.route("/refresh-token").post(authController.refreshToken);
+Router.route("/deleteMe").patch(userController.deleteMe);
+Router.route("/updateMe").patch(
+  userController.uploaduserPhoto,
+  userController.resizeUserPhoto,
+  userController.validator,
+  userController.updateMe
+);
 
 Router.use(authController.protect);
+
 Router.use(authController.restrictTo("admin"));
 
 Router.route("/").get(userController.getAll).post(userController.createOne);

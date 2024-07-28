@@ -1,68 +1,54 @@
 "use client";
 import "react-toastify/dist/ReactToastify.css";
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Logo from "@/components/Logo";
 import DetailPage from "@/components/DetailPage";
 import LogOut from "@/components/LogOut";
+import User from "@/components/User";
+import { fetchAccess } from "@/utilites/getClient";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 
 function MoviesDetails({ id }) {
-  useEffect(() => {
-    const fetchData = async () => {
-      const token = localStorage.getItem("accessToken");
-      if (!token) {
-        toast.error("Your are not logged!", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
-        window.setTimeout(() => {
-          location.assign("/login");
-        }, 700);
-        return;
-      }
-      try {
-        const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/movies`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+  let [access, setAccess] = useState(true);
+  let [notificationShown, setNotificationShown] = useState(false);
 
-        if (res.data.status === "error") {
-          toast.error(res.data.message, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-          });
-          window.setTimeout(() => {
-            location.assign("/login");
-          }, 700);
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchData();
-  }, []);
+  const getData = async () => {
+    const result = await fetchAccess();
+    if (result === "error") {
+      setAccess(false);
+    }
+  };
+
+  const notify = () => {
+    if (!access && !notificationShown) {
+      toast.error("You are not logged in!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+      setNotificationShown(true);
+      window.setTimeout(() => {
+        location.assign("/login");
+      }, 1000);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+    notify();
+  }, [access]);
+
   return (
     <div>
       <Logo />
+      <User />
       <Navbar />
       <LogOut />
       <DetailPage id={id} field={"Movie"} />
