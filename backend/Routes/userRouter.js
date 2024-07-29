@@ -8,10 +8,11 @@ Router.route("/signup").post(authController.signup);
 Router.get("/logout", authController.logout);
 Router.route("/refresh-token").post(authController.refreshToken);
 Router.route("/deleteMe").patch(userController.deleteMe);
+Router.route("/updatePassword").patch(authController.updatePassword);
 Router.route("/updateMe").patch(
   userController.uploaduserPhoto,
-  userController.resizeUserPhoto,
   userController.validator,
+  userController.resizeUserPhoto,
   userController.updateMe
 );
 

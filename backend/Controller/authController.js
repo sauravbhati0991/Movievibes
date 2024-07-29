@@ -181,3 +181,19 @@ exports.restrictTo = (...roles) => {
     next();
   };
 };
+
+exports.updatePassword = catchAsync(async (req, res, next) => {
+  const { id } = req.body;
+  const user = await User.findById(id).select("+password");
+  if (!(await user.correctPassword(req.body.currentPassword, user.password))) {
+    res.status(200).json({
+      status: "error",
+      message: "Your current password is wrong.",
+    });
+  } else {
+    user.password = req.body.newPassword;
+    user.passwordConfirm = req.body.confirmNewPassword;
+    await user.save();
+    createAccessAndRefreshToken(user, 200, res);
+  }
+});
