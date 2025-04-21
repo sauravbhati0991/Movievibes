@@ -54,7 +54,7 @@ export default function SearchBar() {
         <div className=" flex flex-col items-start px-5 ">
           {search.map((v, i) => {
             return (
-              <div>
+              <div key={v.id || i}>
                 <hr />
                 <a
                   href={`/${

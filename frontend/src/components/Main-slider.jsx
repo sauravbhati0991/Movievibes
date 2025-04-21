@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import ArrowBackIosOutlinedIcon from "@mui/icons-material/ArrowBackIosOutlined";
@@ -183,7 +184,7 @@ export default function MainSlider() {
         >
           {shows.map((v, i) => {
             return (
-              <img
+              <Image
                 key={i}
                 onClick={() => handleClick(i, v)}
                 id={`poster-id-${i}`}
@@ -200,7 +201,7 @@ export default function MainSlider() {
         </div>
       </div>
       <div className=" absolute w-full h-full z-[-1] bg-[#070F2B] flex justify-center items-center">
-        <img
+        <Image
           className={`w-contain rounded-lg sm:[85%] xsm:w-full md:w-[75%] lg:w-[50%] shadow-[20px_20px_50px_15px_rgba(255,255,255,0.7)] ${
             bgPoster ? null : " aspect-[4/3]"
           }`}

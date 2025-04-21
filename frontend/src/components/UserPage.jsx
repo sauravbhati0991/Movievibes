@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -413,7 +414,7 @@ export default function UserPage() {
             </div>
           )}
           <div className=" flex flex-col gap-2">
-            <img
+            <Image
               src={`/images/${
                 data?.photo.split("/")[data?.photo.split("/").length - 1]
               }`}

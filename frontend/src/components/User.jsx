@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { fetchUserData } from "@/utilites/getUser";
 
@@ -26,7 +27,8 @@ export default function User() {
           onClick={handleProfile}
           className=" flex gap-2 cursor-pointer z-[10] absolute left-2 bg-[#182450] rounded-lg px-2 py-1 top-2"
         >
-          <img
+          <Image
+            alt={`Profile picture of ${data?.name || 'user'}`}
             src={`/images/${
               data?.photo.split("/")[data?.photo.split("/").length - 1]
             }`}

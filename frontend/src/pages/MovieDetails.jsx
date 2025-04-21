@@ -1,6 +1,6 @@
 "use client";
 import "react-toastify/dist/ReactToastify.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Navbar from "@/components/Navbar";
 import Logo from "@/components/Logo";
 import DetailPage from "@/components/DetailPage";
@@ -13,14 +13,14 @@ function MoviesDetails({ id }) {
   let [access, setAccess] = useState(true);
   let [notificationShown, setNotificationShown] = useState(false);
 
-  const getData = async () => {
+  const getData = useCallback(async () => {
     const result = await fetchAccess();
     if (result === "error") {
       setAccess(false);
     }
-  };
+  }, []);
 
-  const notify = () => {
+  const notify = useCallback(() => {
     if (!access && !notificationShown) {
       toast.error("You are not logged in!", {
         position: "top-right",
@@ -38,12 +38,12 @@ function MoviesDetails({ id }) {
         location.assign("/login");
       }, 1000);
     }
-  };
+  }, [access, notificationShown]);
 
   useEffect(() => {
     getData();
     notify();
-  }, [access]);
+  }, [getData, notify]);
 
   return (
     <div>

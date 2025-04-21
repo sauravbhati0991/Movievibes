@@ -365,12 +365,12 @@ export default function DatailPage({ id, field }) {
                   {castAndCrew?.cast.map((v, i) => {
                     return (
                       <a
+                        key={i}
                         href={`/people/${slugify(v?.original_name, {
                           lower: true,
                         })}-${v?.id}`}
                       >
                         <div
-                          key={i}
                           id={`poster-id-cast-${i}`}
                           onMouseOver={() => handleCastMouseOver(i)}
                           onMouseLeave={() => handleCastMouseLeave(i)}
@@ -408,12 +408,12 @@ export default function DatailPage({ id, field }) {
                   {castAndCrew?.crew.map((v, i) => {
                     return (
                       <a
+                        key={i}
                         href={`/people/${slugify(v?.original_name, {
                           lower: true,
                         })}-${v?.id}`}
                       >
                         <div
-                          key={i}
                           id={`poster-id-crew-${i}`}
                           onMouseOver={() => handleCrewMouseOver(i)}
                           onMouseLeave={() => handleCrewMouseLeave(i)}
@@ -488,6 +488,7 @@ export default function DatailPage({ id, field }) {
                     moviesDone?.cast.map((v, i) => {
                       return (
                         <a
+                          key={i}
                           href={`/movies/${slugify(
                             v?.title ? v?.title : v?.original_name,
                             {
@@ -496,7 +497,6 @@ export default function DatailPage({ id, field }) {
                           )}-${v?.id}`}
                         >
                           <div
-                            key={i}
                             id={`poster-id-cast-${i}`}
                             onMouseOver={() => handleCastMouseOver(i)}
                             onMouseLeave={() => handleCastMouseLeave(i)}
@@ -545,7 +545,8 @@ export default function DatailPage({ id, field }) {
                   {tvshowDone?.cast !== null ? (
                     tvshowDone?.cast.map((v, i) => {
                       return (
-                        <a
+                        <a 
+                          key={i}
                           href={`/tvshows/${slugify(
                             v?.title ? v?.title : v?.original_name,
                             {
@@ -554,7 +555,6 @@ export default function DatailPage({ id, field }) {
                           )}-${v?.id}`}
                         >
                           <div
-                            key={i}
                             id={`poster-id-crew-${i}`}
                             onMouseOver={() => handleCrewMouseOver(i)}
                             onMouseLeave={() => handleCrewMouseLeave(i)}
@@ -604,9 +604,8 @@ export default function DatailPage({ id, field }) {
                 <div className=" overflow-x-scroll no-scrollbar px-2 py-4 m-2 rounded-lg flex gap-4">
                   {detail?.production_companies.map((v, i) => {
                     return (
-                      <div>
+                      <div key={i}>
                         <div
-                          key={i}
                           style={{
                             backgroundImage: `${
                               v?.logo_path
