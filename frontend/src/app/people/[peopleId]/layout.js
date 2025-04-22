@@ -1,9 +1,12 @@
 export async function generateStaticParams() {
   try {
-    const response = await fetch('https://movievibes.onrender.com/api/people');
+    const response = await fetch('https://movievibes.onrender.com/api/v1/people');
     
     if (!response.ok) {
-      console.error('API response not ok:', response.status);
+      console.error('API response not ok:', {
+        status: response.status,
+        statusText: response.statusText
+      });
       return [];
     }
 
