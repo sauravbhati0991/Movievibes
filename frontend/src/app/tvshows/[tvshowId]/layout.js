@@ -1,6 +1,12 @@
 export async function generateStaticParams() {
   try {
     const response = await fetch('https://movievibes.onrender.com/api/tvshows');
+    
+    if (!response.ok) {
+      console.error('API response not ok:', response.status);
+      return [];
+    }
+
     const tvshows = await response.json();
     
     return tvshows.map((show) => ({
