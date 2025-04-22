@@ -10,8 +10,14 @@ export async function generateStaticParams() {
       return [];
     }
 
-    const people = await response.json();
-    
+    const data = await response.json();
+    const people = data?.results || [];
+
+    if (!Array.isArray(people)) {
+      console.error('Expected array of people, got:', typeof people);
+      return [];
+    }
+
     return people.map((person) => ({
       peopleId: `person-${person.id}`
     }));
