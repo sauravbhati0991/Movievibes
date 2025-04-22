@@ -9,6 +9,9 @@ const nextConfig = {
           'firebasestorage.googleapis.com' // for Firebase Storage images
         ],
       },
+    reactStrictMode: true,
+    swcMinify: true,
+    trailingSlash: true
 };
 
 export default nextConfig;
