@@ -1,25 +1,19 @@
 export async function generateStaticParams() {
   try {
-    const response = await fetch('https://movievibes.onrender.com/api/v1/people');
-    
-    if (!response.ok) {
-      console.error('API response not ok:', {
-        status: response.status,
-        statusText: response.statusText
-      });
-      return [];
-    }
+    const keyResponse = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/apikey`
+    );
+    const keyData = await keyResponse.json();
+    const apiKey = keyData.ApiKey;
 
+    const response = await fetch(
+      `https://api.themoviedb.org/3/person/popular?api_key=${apiKey}`
+    );
     const data = await response.json();
-    const people = data?.results || [];
-
-    if (!Array.isArray(people)) {
-      console.error('Expected array of people, got:', typeof people);
-      return [];
-    }
+    const people = data.results || [];
 
     return people.map((person) => ({
-      peopleId: `person-${person.id}`
+      peopleId: `${slugify(person.name, { lower: true })}-${person.id}`
     }));
   } catch (error) {
     console.error('Error generating static params:', error);
