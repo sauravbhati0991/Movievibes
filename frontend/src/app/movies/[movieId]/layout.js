@@ -1,6 +1,6 @@
 export async function generateStaticParams() {
   try {
-    const response = await fetch('https://movievibes.onrender.com/api/movies');
+    const response = await fetch('https://movievibes.onrender.com/api/v1/movies');
     
     if (!response.ok) {
       console.error('API response not ok:', {
@@ -10,27 +10,13 @@ export async function generateStaticParams() {
       return [];
     }
 
-    const contentType = response.headers.get('content-type');
-    if (!contentType || !contentType.includes('application/json')) {
-      console.error('Invalid content type:', contentType);
-      return [];
-    }
-
     const movies = await response.json();
     
-    if (!Array.isArray(movies)) {
-      console.error('Expected array of movies, got:', typeof movies);
-      return [];
-    }
-
     return movies.map((movie) => ({
       movieId: `movie-${movie.id}`
     }));
   } catch (error) {
-    console.error('Error generating static params:', {
-      message: error.message,
-      stack: error.stack
-    });
+    console.error('Error generating static params:', error);
     return []; 
   }
 }
