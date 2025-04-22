@@ -1,6 +1,5 @@
 // @type {import('next').NextConfig}
 const nextConfig = {
-  output: 'export',  // This enables static exports
   images: {
     domains: [
       'image.tmdb.org',  // for TMDB images
