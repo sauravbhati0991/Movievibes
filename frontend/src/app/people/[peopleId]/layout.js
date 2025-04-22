@@ -1,3 +1,5 @@
+import slugify from "slugify";
+
 export async function generateStaticParams() {
   try {
     const keyResponse = await fetch(
