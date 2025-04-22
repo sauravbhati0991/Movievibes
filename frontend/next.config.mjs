@@ -2,6 +2,7 @@
 const nextConfig = {
     output: 'export',
     images: {
+        unoptimized: true,
         domains: [
           'image.tmdb.org',  // for TMDB images
           'lh3.googleusercontent.com', // for Google auth profile pictures
