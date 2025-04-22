@@ -3,15 +3,24 @@ const nextConfig = {
     output: 'export',
     images: {
         unoptimized: true,
-        domains: [
-          'image.tmdb.org',  // for TMDB images
-          'lh3.googleusercontent.com', // for Google auth profile pictures
-          'firebasestorage.googleapis.com' // for Firebase Storage images
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'image.tmdb.org',
+            },
+            {
+                protocol: 'https',
+                hostname: 'lh3.googleusercontent.com',
+            },
+            {
+                protocol: 'https',
+                hostname: 'firebasestorage.googleapis.com',
+            },
         ],
-      },
+    },
+    trailingSlash: true,
     reactStrictMode: true,
     swcMinify: true,
-    trailingSlash: true
 };
 
-export default nextConfig;
+module.exports = nextConfig;
