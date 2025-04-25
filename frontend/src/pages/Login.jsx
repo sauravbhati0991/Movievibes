@@ -120,12 +120,12 @@ function Login() {
               Login
             </button>
             <p className=" text-white py-2">
-              Create aew account{" "}
+              Create new account{" "}
               <a
                 href="/signup"
                 className=" text-[#334999] hover:underline text-nowrap"
               >
-                click here
+                SignUp
               </a>
             </p>
           </form>
